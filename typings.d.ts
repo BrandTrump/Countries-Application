@@ -71,6 +71,7 @@ interface Country {
   demonyms: Demonyms;
   flag: string;
   maps: Maps;
+  borders?: string[];
   population: number;
   fifa: string;
   car: { signs: string[]; side: string };
