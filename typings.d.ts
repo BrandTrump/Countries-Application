@@ -48,6 +48,7 @@ interface CapitalInfo {
 }
 
 interface Country {
+  filter(arg0: (country: any) => any): unknown;
   name: CommonName;
   tld: string[];
   cca2: string;
