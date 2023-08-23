@@ -1,3 +1,4 @@
+import SearchSection from "@/components/SearchSection";
 import { fetchAllCountries } from "@/helpers/fetchAllCountries";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +7,8 @@ export default async function Home() {
   const data = await fetchAllCountries();
 
   return (
-    <main className="p-8 lg:w-5/6 xl:w-3/5 mx-auto mt-10">
+    <main className="lg:w-5/6 xl:w-3/5 mx-auto">
+      <SearchSection countries={data} />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
         {data.map((country: Country) => (
           <Link
@@ -34,7 +36,9 @@ export default async function Home() {
                 </p>
                 <p className="font-semibold">
                   Capital:{" "}
-                  <span className="font-normal">{country.capital}</span>
+                  <span className="font-normal">
+                    {country.capital && country.capital[0]}
+                  </span>
                 </p>
               </div>
             </div>
