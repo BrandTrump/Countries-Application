@@ -64,7 +64,7 @@ interface Country {
   altSpellings: string[];
   region: string;
   subregion: string;
-  languages: Language;
+  languages: string;
   translations: Translations;
   latlng: number[];
   landlocked: boolean;
