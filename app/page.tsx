@@ -14,14 +14,14 @@ export default async function Home() {
           <Link
             href={`/country/${country.name.common}`}
             key={country.name.common}
-            className="shadow-lg rounded-md hover:scale-105 transition duration-200 cursor-pointer"
+            className="shadow-lg rounded-md hover:scale-105 transition-transform duration-200 cursor-pointer dark:bg-gray-600/50"
           >
             <Image
               src={country.flags.png}
               alt={country.flags.alt === undefined ? "" : country.flags.alt}
               width={400}
               height={400}
-              className="w-full h-52 rounded-t-md"
+              className="w-full h-52 rounded-t-md border-b"
             />
             <div className="px-4 py-8">
               <h1 className="font-bold text-lg">{country.name.common}</h1>
