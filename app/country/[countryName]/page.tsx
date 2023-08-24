@@ -20,7 +20,7 @@ async function CountryPage({ params: { countryName } }: Props) {
             alt={country.flags.alt === undefined ? "" : country.flags.alt}
             width={400}
             height={400}
-            className="w-1/2 aspect-[5/3] rounded-sm"
+            className="w-1/2 aspect-[5/3] rounded-sm border"
           />
 
           <aside className="flex flex-col justify-around">
@@ -53,21 +53,41 @@ async function CountryPage({ params: { countryName } }: Props) {
                   <span className="font-normal">{country.tld}</span>
                 </p>
                 <p className="font-semibold">
-                  Currencies: <span className="font-normal">{}</span>
+                  Currencies:{" "}
+                  {Object.keys(country.currencies).map((currencyCode) => (
+                    <span key={currencyCode} className="font-normal">
+                      {country.currencies[currencyCode].name}
+                    </span>
+                  ))}
                 </p>
+
                 <p className="font-semibold">
                   Languages:{" "}
-                  <span className="font-normal">{country.languages.eng}</span>
+                  {Object.keys(country.languages)
+                    .slice(0, 1)
+                    .map((languageKey: any) => (
+                      <span key={languageKey} className="font-normal">
+                        {country.languages[languageKey]}
+                      </span>
+                    ))}
                 </p>
               </div>
             </div>
-            {/* placeholder */}
-            <p className="font-semibold flex items-center gap-4">
-              Border Countries:{" "}
-              <span className="py-1 px-6 shadow-md rounded-sm font-light border">
-                France
-              </span>
-            </p>
+
+            {!country.borders ? null : (
+              <p className="font-semibold flex items-center gap-4">
+                Border Countries:{" "}
+                {country.borders &&
+                  country.borders.slice(0, 3).map((border, i) => (
+                    <span
+                      key={i}
+                      className="py-1 px-6 shadow-md rounded-sm font-light border"
+                    >
+                      {border}
+                    </span>
+                  ))}
+              </p>
+            )}
           </aside>
         </div>
       ))}
