@@ -34,12 +34,14 @@ export default async function Home() {
                 <p className="font-semibold">
                   Region: <span className="font-normal">{country.region}</span>
                 </p>
-                <p className="font-semibold">
-                  Capital:{" "}
-                  <span className="font-normal">
-                    {country.capital && country.capital[0]}
-                  </span>
-                </p>
+                {!country.capital ? null : (
+                  <p className="font-semibold">
+                    Capital:{" "}
+                    <span className="font-normal">
+                      {country.capital && country.capital[0]}
+                    </span>
+                  </p>
+                )}
               </div>
             </div>
           </Link>
