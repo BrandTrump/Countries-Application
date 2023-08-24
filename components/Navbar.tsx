@@ -3,7 +3,7 @@ import DarkModeButton from "./DarkModeButton";
 
 function Navbar() {
   return (
-    <nav className="py-6 shadow-md border-b">
+    <nav className="py-6 shadow-md border-b dark:bg-gray-700/40">
       <div className="flex justify-between items-center lg:w-5/6 xl:w-3/5 mx-auto">
         <Link href={"/"} className="text-2xl font-semibold">
           Where in the world?
