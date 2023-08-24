@@ -1,0 +1,89 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import SearchByRegion from "./SearchByRegion";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+
+function CountriesList({
+  search,
+}: {
+  search: (search: string) => Promise<string[]>;
+}) {
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [searchString, setSearchString] = useState("");
+
+  useEffect(() => {
+    search("").then((name) => setCountries(name));
+  }, [search]);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setCountries(await search(searchString));
+  };
+
+  return (
+    <>
+      <div className="my-20 flex justify-between items-center">
+        <form className="relative">
+          <input
+            type="text"
+            value={searchString}
+            placeholder="Search for a country..."
+            className="py-3 px-4 w-96 shadow-md rounded-md border"
+            onChange={(e) => setSearchString(e.target.value)}
+          />
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="absolute top-1/2 -translate-y-1/2 right-0 mr-3"
+          >
+            <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
+          </button>
+        </form>
+        <SearchByRegion />
+      </div>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
+        {countries.map((country: Country) => (
+          <Link
+            href={`/country/${country.name.common}`}
+            key={country.name.common}
+            className="shadow-lg rounded-md hover:scale-105 transition-transform duration-200 cursor-pointer dark:bg-gray-600/50"
+          >
+            <Image
+              src={country.flags.png}
+              alt={country.flags.alt === undefined ? "" : country.flags.alt}
+              width={400}
+              height={400}
+              className="w-full h-52 rounded-t-md border-b"
+            />
+            <div className="px-4 py-8">
+              <h1 className="font-bold text-lg">{country.name.common}</h1>
+
+              <div className="mt-3">
+                <p className="font-semibold">
+                  Population:{" "}
+                  <span className="font-normal">{country.population}</span>
+                </p>
+                <p className="font-semibold">
+                  Region: <span className="font-normal">{country.region}</span>
+                </p>
+                {!country.capital ? null : (
+                  <p className="font-semibold">
+                    Capital:{" "}
+                    <span className="font-normal">
+                      {country.capital && country.capital[0]}
+                    </span>
+                  </p>
+                )}
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default CountriesList;
