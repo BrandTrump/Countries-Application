@@ -12,28 +12,43 @@ async function CountryPage({ params: { countryName } }: Props) {
   const data = await fetchCountry(countryName);
   return (
     <section className="lg:w-5/6 xl:w-3/5 mx-auto mt-10">
-      <BackButton />
-      {data.map((country: Country) => (
-        <div key={country.name.common} className="flex justify-between">
+      <div className="px-8 lg:px-0">
+        <BackButton />
+      </div>
+      {data.slice(0, 1).map((country: Country) => (
+        <div
+          key={country.name.common}
+          className="flex flex-col lg:flex-row lg:justify-between px-8 lg:px-0 lg:space-x-10"
+        >
           <Image
             src={country.flags.png}
             alt={country.flags.alt === undefined ? "" : country.flags.alt}
             width={400}
             height={400}
-            className="w-1/2 aspect-[5/3] rounded-sm border"
+            className="w-full md:w-1/2 aspect-[5/3] rounded-sm border dark:border-none"
           />
 
-          <aside className="flex flex-col justify-around">
-            <h1 className="font-bold text-4xl">{country.name.common}</h1>
-            <div className="flex justify-between space-x-10">
+          <aside className="flex flex-col justify-around mt-10 lg:mt-0">
+            <h1 className="font-bold text-2xl md:text-4xl">
+              {country.name.common}
+            </h1>
+            <div className="flex flex-col md:flex-row md:justify-between md:space-x-10 md:space-y-0 space-y-10 mt-5 lg:mt-0">
               <div className="space-y-3">
                 <p className="font-semibold">
                   Native Name:{" "}
-                  <span className="font-normal">{country.name.official}</span>
+                  {Object.keys(country.name.nativeName)
+                    .slice(0, 1)
+                    .map((nativeCode) => (
+                      <span key={nativeCode} className="font-normal">
+                        {country.name.nativeName[nativeCode].common}
+                      </span>
+                    ))}
                 </p>
                 <p className="font-semibold">
                   Population:{" "}
-                  <span className="font-normal">{country.population}</span>
+                  <span className="font-normal">
+                    {country.population.toLocaleString()}
+                  </span>
                 </p>
                 <p className="font-semibold">
                   Region: <span className="font-normal">{country.region}</span>
@@ -44,7 +59,9 @@ async function CountryPage({ params: { countryName } }: Props) {
                 </p>
                 <p className="font-semibold">
                   capital:{" "}
-                  <span className="font-normal">{country.capital[0]}</span>
+                  <span className="font-normal">
+                    {country.capital && country.capital[0]}
+                  </span>
                 </p>
               </div>
               <div className="space-y-3">
@@ -64,10 +81,11 @@ async function CountryPage({ params: { countryName } }: Props) {
                 <p className="font-semibold">
                   Languages:{" "}
                   {Object.keys(country.languages)
-                    .slice(0, 1)
-                    .map((languageKey: any) => (
+                    .slice(0, 3)
+                    .map((languageKey: any, index: number, array: string[]) => (
                       <span key={languageKey} className="font-normal">
                         {country.languages[languageKey]}
+                        {index !== array.length - 1 && ", "}
                       </span>
                     ))}
                 </p>
@@ -75,18 +93,18 @@ async function CountryPage({ params: { countryName } }: Props) {
             </div>
 
             {!country.borders ? null : (
-              <p className="font-semibold flex items-center gap-4">
-                Border Countries:{" "}
+              <div className="font-semibold flex flex-col md:flex-row md:items-center gap-4 my-10">
+                <p>Border Countries:</p>
                 {country.borders &&
                   country.borders.slice(0, 3).map((border, i) => (
-                    <span
+                    <div
                       key={i}
-                      className="py-1 px-6 shadow-md rounded-sm font-light border"
+                      className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none"
                     >
                       {border}
-                    </span>
+                    </div>
                   ))}
-              </p>
+              </div>
             )}
           </aside>
         </div>

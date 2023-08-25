@@ -18,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} trasition duration-100`}>
+      <body
+        className={`${inter.className} trasition duration-100 dark:bg-[#202c37]`}
+      >
         <Provider>
           <Navbar />
           {children}

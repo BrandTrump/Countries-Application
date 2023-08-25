@@ -6,7 +6,7 @@ function BackButton() {
   return (
     <button
       onClick={() => route.back()}
-      className="py-2 px-8 shadow-md rounded-md border my-10 md:my-20 flex gap-2 items-center"
+      className="py-2 px-8 shadow-md rounded-md border my-10 md:my-20 flex gap-2 items-center dark:bg-[#2b3945] dark:border-none"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
