@@ -2,6 +2,11 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useRouter } from "next/navigation";
+
+type RegionName = {
+  name: string;
+};
 
 const regions = [
   { name: "Africa" },
@@ -12,13 +17,17 @@ const regions = [
 ];
 
 function SearchByRegion() {
-  const [selected, setSelected] = useState(regions[0]);
+  const route = useRouter();
+  const [selected, setSelected] = useState<RegionName>();
+
   return (
-    <div className="w-64">
+    <div className="w-full md:w-64">
       <Listbox value={selected} onChange={setSelected}>
-        <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm border dark:bg-gray-500/60 dark:text-gray-300">
-            <span className="block truncate">{selected.name}</span>
+        <div className="relative">
+          <Listbox.Button className="relative w-full rounded-lg bg-white py-3.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm border dark:bg-gray-500/60 dark:text-gray-300 cursor-pointer">
+            <span className="block truncate">
+              {selected ? selected.name : "Filter by Region"}
+            </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-5 w-5 text-gray-400"

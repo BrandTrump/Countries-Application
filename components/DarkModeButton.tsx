@@ -30,12 +30,12 @@ function DarkModeButton() {
       {currentTheme === "dark" ? (
         <>
           <SunIcon className="h-6 w-6" />
-          <h2 className="text-lg">Light Mode</h2>
+          <h2 className="text-md md:text-lg">Light Mode</h2>
         </>
       ) : (
         <>
           <MoonIcon className="h-6 w-6" />
-          <h2 className="text-lg">Dark Mode</h2>
+          <h2 className="text-md md:text-lg">Dark Mode</h2>
         </>
       )}
     </div>

@@ -15,23 +15,25 @@ function CountriesList({
   const [searchString, setSearchString] = useState("");
 
   useEffect(() => {
+    //@ts-ignore
     search("").then((name) => setCountries(name));
   }, [search]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    //@ts-ignore
     setCountries(await search(searchString));
   };
 
   return (
     <>
-      <div className="my-20 flex justify-between items-center">
+      <div className="my-10 md:my-20 md:px-8 lg:px-0 flex flex-col md:justify-between md:items-center md:flex-row space-y-4 md:space-y-0">
         <form className="relative">
           <input
             type="text"
             value={searchString}
             placeholder="Search for a country..."
-            className="py-3 px-4 w-96 shadow-md rounded-md border"
+            className="py-3 px-4 w-full md:w-96 shadow-md rounded-md border"
             onChange={(e) => setSearchString(e.target.value)}
           />
           <button
@@ -44,7 +46,7 @@ function CountriesList({
         </form>
         <SearchByRegion />
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
+      <div className="grid md:grid-cols-2 md:p-8 lg:px-0 lg:grid-cols-3 2xl:grid-cols-4 gap-14">
         {countries.map((country: Country) => (
           <Link
             href={`/country/${country.name.common}`}
@@ -64,7 +66,9 @@ function CountriesList({
               <div className="mt-3">
                 <p className="font-semibold">
                   Population:{" "}
-                  <span className="font-normal">{country.population}</span>
+                  <span className="font-normal">
+                    {country.population.toLocaleString()}
+                  </span>
                 </p>
                 <p className="font-semibold">
                   Region: <span className="font-normal">{country.region}</span>
