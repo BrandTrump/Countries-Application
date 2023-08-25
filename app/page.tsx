@@ -13,7 +13,7 @@ export default function Home() {
   }
 
   return (
-    <main className="lg:w-5/6 xl:w-3/5 mx-auto mb-10">
+    <main className="p-5 md:p-0 lg:w-5/6 xl:w-3/5 mx-auto mb-10">
       <CountriesList search={search} />
     </main>
   );
