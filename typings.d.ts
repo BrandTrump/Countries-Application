@@ -1,9 +1,4 @@
 interface NativeName {
-  eng: CommonName;
-  smo: CommonName;
-}
-
-interface CommonName {
   official: string;
   common: string;
 }
@@ -50,6 +45,7 @@ interface CapitalInfo {
 interface Country {
   filter(arg0: (country: any) => any): unknown;
   name: CommonName;
+  nativeName: { [key: string]: NativeName };
   tld: string[];
   cca2: string;
   ccn3: string;
