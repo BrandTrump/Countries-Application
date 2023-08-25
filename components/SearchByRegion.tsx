@@ -8,6 +8,10 @@ type RegionName = {
   name: string;
 };
 
+interface Props {
+  regionName: string;
+}
+
 const regions = [
   { name: "Africa" },
   { name: "Americas" },
@@ -16,18 +20,23 @@ const regions = [
   { name: "Oceania" },
 ];
 
-function SearchByRegion() {
+function SearchByRegion({ regionName }: Props) {
   const route = useRouter();
-  const [selected, setSelected] = useState<RegionName>();
+  const [selected, setSelected] = useState<RegionName>({ name: "" });
+
+  const handleSelectedRegion = (region: RegionName) => {
+    setSelected(region);
+    if (region) {
+      route.push(`/region/${region.name}`);
+    }
+  };
 
   return (
     <div className="w-full md:w-64">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={handleSelectedRegion}>
         <div className="relative">
-          <Listbox.Button className="relative w-full rounded-lg bg-white py-3.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm border dark:bg-gray-500/60 dark:text-gray-300 cursor-pointer">
-            <span className="block truncate">
-              {selected ? selected.name : "Filter by Region"}
-            </span>
+          <Listbox.Button className="relative w-full rounded-lg bg-white py-3.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm border dark:bg-[#2b3945] dark:border-none  cursor-pointer">
+            <span className="block truncate">{regionName}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-5 w-5 text-gray-400"
@@ -41,7 +50,7 @@ function SearchByRegion() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm dark:bg-gray-500 z-50">
+            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm dark:bg-[#2b3945] z-50">
               {regions.map((region, regionIdx) => (
                 <Listbox.Option
                   key={regionIdx}
