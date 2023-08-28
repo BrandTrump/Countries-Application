@@ -13,14 +13,14 @@ interface Props {
 async function CountryPage({ params: { countryName } }: Props) {
   const data = await fetchCountry(countryName);
   return (
-    <section className="px-8 2xl:px-0 2xl:w-4/5 mx-auto mt-10">
-      <div className="px-8 lg:px-0">
+    <section className="px-5 2xl:px-0 2xl:w-4/5 mx-auto mt-10">
+      <div className="lg:px-0">
         <BackButton />
       </div>
       {data.map((country: Country) => (
         <div
           key={country.name.common}
-          className="flex flex-col lg:flex-row lg:justify-between px-8 lg:px-0 lg:space-x-10"
+          className="flex flex-col lg:flex-row lg:justify-between lg:px-0 lg:space-x-10"
         >
           <Image
             src={country.flags.png}
