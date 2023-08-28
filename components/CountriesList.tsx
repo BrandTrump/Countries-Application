@@ -54,16 +54,16 @@ function CountriesList({ search, regionName }: Props) {
           <div className="grid md:grid-cols-2 md:px-8 lg:px-0 xl:grid-cols-3 2xl:grid-cols-4 gap-14">
             {countries.map((country: Country) => (
               <Link
-                href={`/country/${country.name.common}`}
+                href={`/country/${country.cca3}`}
                 key={country.name.common}
-                className="shadow-lg rounded-md hover:scale-105 transition-transform duration-200 cursor-pointer dark:bg-[#2b3945]"
+                className="shadow-lg rounded-md hover:scale-105 transition-transform duration-200 cursor-pointer dark:bg-[#2b3945] bg-white"
               >
                 <Image
                   src={country.flags.png}
                   alt={country.flags.alt === undefined ? "" : country.flags.alt}
                   width={400}
                   height={400}
-                  className="w-full h-52 rounded-t-md border-b dark:border-none"
+                  className="w-full h-auto rounded-t-md border-b dark:border-none aspect-[5/3]"
                 />
                 <div className="px-4 py-8">
                   <h1 className="font-bold text-lg">{country.name.common}</h1>

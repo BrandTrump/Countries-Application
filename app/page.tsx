@@ -12,7 +12,7 @@ export default function Home() {
   }
 
   return (
-    <main className="p-5 md:p-0 lg:w-5/6 xl:w-3/5 mx-auto mb-10">
+    <main className="p-5 2xl:p-0 2xl:w-4/5 mx-auto mb-10">
       <CountriesList search={search} regionName={"Filter by Region"} />
     </main>
   );
