@@ -13,6 +13,7 @@ interface Props {
 }
 
 const regions = [
+  { name: "All" },
   { name: "Africa" },
   { name: "Americas" },
   { name: "Asia" },
@@ -26,7 +27,9 @@ function SearchByRegion({ regionName }: Props) {
 
   const handleSelectedRegion = (region: RegionName) => {
     setSelected(region);
-    if (region) {
+    if (region.name === "All") {
+      route.push(`/`);
+    } else {
       route.push(`/region/${region.name}`);
     }
   };
