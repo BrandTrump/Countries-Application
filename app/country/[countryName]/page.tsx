@@ -1,6 +1,8 @@
 import BackButton from "@/components/BackButton";
 import { fetchCountry } from "@/helpers/fetchCountry";
+import { getBorderName } from "@/helpers/getBorderName";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   params: {
@@ -11,11 +13,11 @@ interface Props {
 async function CountryPage({ params: { countryName } }: Props) {
   const data = await fetchCountry(countryName);
   return (
-    <section className="lg:w-5/6 xl:w-3/5 mx-auto mt-10">
+    <section className="px-8 2xl:px-0 2xl:w-4/5 mx-auto mt-10">
       <div className="px-8 lg:px-0">
         <BackButton />
       </div>
-      {data.slice(0, 1).map((country: Country) => (
+      {data.map((country: Country) => (
         <div
           key={country.name.common}
           className="flex flex-col lg:flex-row lg:justify-between px-8 lg:px-0 lg:space-x-10"
@@ -58,7 +60,7 @@ async function CountryPage({ params: { countryName } }: Props) {
                   <span className="font-normal">{country.subregion}</span>
                 </p>
                 <p className="font-semibold">
-                  capital:{" "}
+                  Capital:{" "}
                   <span className="font-normal">
                     {country.capital && country.capital[0]}
                   </span>
@@ -97,12 +99,13 @@ async function CountryPage({ params: { countryName } }: Props) {
                 <p>Border Countries:</p>
                 {country.borders &&
                   country.borders.slice(0, 3).map((border, i) => (
-                    <div
+                    <Link
+                      href={`/country/${border}`}
                       key={i}
-                      className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none"
+                      className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none bg-white"
                     >
                       {border}
-                    </div>
+                    </Link>
                   ))}
               </div>
             )}
