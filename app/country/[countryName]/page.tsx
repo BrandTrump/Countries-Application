@@ -80,7 +80,7 @@ async function CountryPage({ params: { countryName } }: Props) {
                   ))}
                 </p>
 
-                <p className="font-semibold">
+                <p className="font-semibold pb-10">
                   Languages:{" "}
                   {Object.keys(country.languages)
                     .slice(0, 3)
@@ -95,18 +95,20 @@ async function CountryPage({ params: { countryName } }: Props) {
             </div>
 
             {!country.borders ? null : (
-              <div className="font-semibold flex flex-col md:flex-row md:items-center gap-4 my-10">
-                <p>Border Countries:</p>
-                {country.borders &&
-                  country.borders.slice(0, 3).map((border, i) => (
-                    <Link
-                      href={`/country/${border}`}
-                      key={i}
-                      className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none bg-white"
-                    >
-                      {border}
-                    </Link>
-                  ))}
+              <div className="font-semibold md:flex md:items-center gap-4 mb-10">
+                <p className="">Border Countries:</p>
+                <div className="flex justify-between gap-3 items-center mt-4 md:mt-0">
+                  {country.borders &&
+                    country.borders.slice(0, 3).map((border, i) => (
+                      <Link
+                        href={`/country/${border}`}
+                        key={i}
+                        className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none bg-white w-full"
+                      >
+                        {border}
+                      </Link>
+                    ))}
+                </div>
               </div>
             )}
           </aside>
