@@ -1,6 +1,6 @@
 import BackButton from "@/components/BackButton";
+import { fetchBorderNames } from "@/helpers/fetchBorderNames";
 import { fetchCountry } from "@/helpers/fetchCountry";
-import { getBorderName } from "@/helpers/getBorderName";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +12,16 @@ interface Props {
 
 async function CountryPage({ params: { countryName } }: Props) {
   const data = await fetchCountry(countryName);
+
+  const borders = data.map(
+    (border: Country) => border.borders?.slice(0, 3).join(",") || ""
+  );
+
+  let borderData: any = null;
+  if (borders[0] !== "") {
+    borderData = await fetchBorderNames(borders);
+  }
+
   return (
     <section className="px-5 2xl:px-0 2xl:w-4/5 mx-auto mt-10">
       <div className="lg:px-0">
@@ -94,18 +104,18 @@ async function CountryPage({ params: { countryName } }: Props) {
               </div>
             </div>
 
-            {!country.borders ? null : (
+            {!borderData ? null : (
               <div className="font-semibold md:flex md:items-center gap-4 mb-10">
                 <p className="">Border Countries:</p>
                 <div className="flex justify-between gap-3 items-center mt-4 md:mt-0">
-                  {country.borders &&
-                    country.borders.slice(0, 3).map((border, i) => (
+                  {borderData &&
+                    borderData.map((border: Country, i: any) => (
                       <Link
-                        href={`/country/${border}`}
+                        href={`/country/${border.cca3}`}
                         key={i}
                         className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none bg-white w-full"
                       >
-                        {border}
+                        {border.name.common}
                       </Link>
                     ))}
                 </div>
