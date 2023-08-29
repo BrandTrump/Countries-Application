@@ -43,6 +43,7 @@ interface CapitalInfo {
 }
 
 interface Country {
+  find(arg0: (country: any) => any): any;
   filter(arg0: (country: any) => any): unknown;
   name: CommonName;
   nativeName: { [key: string]: NativeName };
