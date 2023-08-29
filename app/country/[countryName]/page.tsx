@@ -104,7 +104,13 @@ async function CountryPage({ params: { countryName } }: Props) {
               </div>
             </div>
 
-            {!borderData ? null : (
+            {!borderData ? (
+              <div className="font-semibold mb-10">
+                <p>
+                  Border Countries: <span className="font-normal">N/A</span>
+                </p>
+              </div>
+            ) : (
               <div className="font-semibold md:flex md:items-center gap-4 mb-10">
                 <p className="whitespace-nowrap">Border Countries:</p>
                 <div className="flex justify-between gap-3 items-center mt-4 md:mt-0 w-full">
