@@ -40,7 +40,7 @@ async function CountryPage({ params: { countryName } }: Props) {
             className="w-full md:w-1/2 aspect-[5/3] rounded-sm border dark:border-none"
           />
 
-          <aside className="flex flex-col justify-around mt-10 lg:mt-0">
+          <aside className="flex flex-col justify-around mt-10">
             <h1 className="font-bold text-2xl md:text-4xl">
               {country.name.common}
             </h1>
@@ -106,14 +106,14 @@ async function CountryPage({ params: { countryName } }: Props) {
 
             {!borderData ? null : (
               <div className="font-semibold md:flex md:items-center gap-4 mb-10">
-                <p className="">Border Countries:</p>
-                <div className="flex justify-between gap-3 items-center mt-4 md:mt-0">
+                <p className="whitespace-nowrap">Border Countries:</p>
+                <div className="flex justify-between gap-3 items-center mt-4 md:mt-0 w-full">
                   {borderData &&
                     borderData.map((border: Country, i: any) => (
                       <Link
                         href={`/country/${border.cca3}`}
                         key={i}
-                        className="py-1 px-6 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none bg-white w-full"
+                        className="py-1 shadow-md rounded-sm font-light border text-center dark:bg-[#2b3945] dark:border-none bg-white w-full"
                       >
                         {border.name.common}
                       </Link>
