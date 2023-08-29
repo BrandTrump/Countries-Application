@@ -33,11 +33,11 @@ async function CountryPage({ params: { countryName } }: Props) {
           className="flex flex-col lg:flex-row lg:justify-between lg:px-0 lg:space-x-10"
         >
           <Image
-            src={country.flags.png}
+            src={country.flags.svg}
             alt={country.flags.alt === undefined ? "" : country.flags.alt}
             width={400}
             height={400}
-            className="w-full md:w-1/2 aspect-[5/3] rounded-sm border dark:border-none"
+            className="w-full md:w-1/2 aspect-[5/3] object-cover rounded-sm border dark:border-none"
           />
 
           <aside className="flex flex-col justify-around mt-10">

@@ -59,11 +59,11 @@ function CountriesList({ search, regionName }: Props) {
                 className="shadow-lg rounded-md hover:scale-105 transition-transform duration-200 cursor-pointer dark:bg-[#2b3945] bg-white"
               >
                 <Image
-                  src={country.flags.png}
+                  src={country.flags.svg}
                   alt={country.flags.alt === undefined ? "" : country.flags.alt}
                   width={400}
                   height={400}
-                  className="w-full h-auto rounded-t-md border-b dark:border-none aspect-[5/3]"
+                  className="h-auto w-full object-cover rounded-t-md border-b dark:border-none aspect-[5/3]"
                 />
                 <div className="px-4 py-8">
                   <h1 className="font-bold text-lg">{country.name.common}</h1>
