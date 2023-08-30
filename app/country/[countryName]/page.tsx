@@ -46,16 +46,22 @@ async function CountryPage({ params: { countryName } }: Props) {
             </h1>
             <div className="flex flex-col md:flex-row md:justify-between md:space-x-10 md:space-y-0 space-y-10 mt-5 lg:mt-0">
               <div className="space-y-3">
-                <p className="font-semibold">
-                  Native Name:{" "}
-                  {Object.keys(country.name.nativeName)
-                    .slice(0, 1)
-                    .map((nativeCode) => (
-                      <span key={nativeCode} className="font-normal">
-                        {country.name.nativeName[nativeCode].common}
-                      </span>
-                    ))}
-                </p>
+                {country.name.nativeName ? (
+                  <p className="font-semibold">
+                    Native Name:{" "}
+                    {Object.keys(country.name.nativeName)
+                      .slice(0, 1)
+                      .map((nativeCode) => (
+                        <span key={nativeCode} className="font-normal">
+                          {country.name.nativeName[nativeCode].common}
+                        </span>
+                      ))}
+                  </p>
+                ) : (
+                  <p className="font-semibold">
+                    Native Name: <span className="font-normal">N/A</span>
+                  </p>
+                )}
                 <p className="font-semibold">
                   Population:{" "}
                   <span className="font-normal">
@@ -65,42 +71,69 @@ async function CountryPage({ params: { countryName } }: Props) {
                 <p className="font-semibold">
                   Region: <span className="font-normal">{country.region}</span>
                 </p>
-                <p className="font-semibold">
-                  Sub Region:{" "}
-                  <span className="font-normal">{country.subregion}</span>
-                </p>
-                <p className="font-semibold">
-                  Capital:{" "}
-                  <span className="font-normal">
-                    {country.capital && country.capital[0]}
-                  </span>
-                </p>
+                {country.subregion ? (
+                  <p className="font-semibold">
+                    Sub Region:{" "}
+                    <span className="font-normal">{country.subregion}</span>
+                  </p>
+                ) : (
+                  <p className="font-semibold">
+                    Sub Region: <span className="font-normal">N/A</span>
+                  </p>
+                )}
+
+                {country.capital ? (
+                  <p className="font-semibold">
+                    Capital:{" "}
+                    <span className="font-normal">
+                      {country.capital && country.capital[0]}
+                    </span>
+                  </p>
+                ) : (
+                  <p className="font-semibold">
+                    Capital: <span className="font-normal">N/A</span>
+                  </p>
+                )}
               </div>
               <div className="space-y-3">
                 <p className="font-semibold">
                   Top Level Domain:{" "}
                   <span className="font-normal">{country.tld}</span>
                 </p>
-                <p className="font-semibold">
-                  Currencies:{" "}
-                  {Object.keys(country.currencies).map((currencyCode) => (
-                    <span key={currencyCode} className="font-normal">
-                      {country.currencies[currencyCode].name}
-                    </span>
-                  ))}
-                </p>
-
-                <p className="font-semibold pb-10">
-                  Languages:{" "}
-                  {Object.keys(country.languages)
-                    .slice(0, 3)
-                    .map((languageKey: any, index: number, array: string[]) => (
-                      <span key={languageKey} className="font-normal">
-                        {country.languages[languageKey]}
-                        {index !== array.length - 1 && ", "}
+                {country.currencies ? (
+                  <p className="font-semibold">
+                    Currencies:{" "}
+                    {Object.keys(country.currencies).map((currencyCode) => (
+                      <span key={currencyCode} className="font-normal">
+                        {country.currencies[currencyCode].name}
                       </span>
                     ))}
-                </p>
+                  </p>
+                ) : (
+                  <p className="font-semibold">
+                    Currencies: <span className="font-normal">N/A</span>
+                  </p>
+                )}
+
+                {country.languages ? (
+                  <p className="font-semibold pb-10">
+                    Languages:{" "}
+                    {Object.keys(country.languages)
+                      .slice(0, 3)
+                      .map(
+                        (languageKey: any, index: number, array: string[]) => (
+                          <span key={languageKey} className="font-normal">
+                            {country.languages[languageKey]}
+                            {index !== array.length - 1 && ", "}
+                          </span>
+                        )
+                      )}
+                  </p>
+                ) : (
+                  <p className="font-semibold">
+                    Languages: <span className="font-normal">N/A</span>
+                  </p>
+                )}
               </div>
             </div>
 
